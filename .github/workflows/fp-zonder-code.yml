@@ -1,0 +1,36 @@
+name: Demo - FP zonder toegangscode
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  aanpassen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wijzigingen
+        run: |
+          python3 <<'PY'
+          import pathlib
+          def rep(f, old, new):
+              p = pathlib.Path(f); s = p.read_text()
+              n = s.count(old)
+              if n != 1: raise SystemExit(f'{f}: {n}x {old[:50]!r}')
+              p.write_text(s.replace(old, new)); print('ok', f)
+          m = 'demo/mock-api.js'
+          rep(m, "if (!me.isHost) return ok({ bezoeker: false });", "if (!me.isHost) return ok({ bezoeker: false });\n      // Demo: geen toegangscode, de host opent Functioneringsgesprekken direct.\n      return ok({ bezoeker: true, open: true, modus: 'echt', openTot: iso(Date.now() + 365 * DAY) });")
+          rep(m, "var tries = 0, iv", "var tries = 21, iv")
+          rep(m, "if (!u.isHost && u.fp_access) {", "if (u.isHost || u.fp_access) {")
+          rep('index.html', "if(r.isHost)return '<div class=\"w-sub\">Bezoeker · toegangscode nodig</div>';", "")
+          f = 'functioneringsportaal/index.html'
+          rep(f, "      if(hostFull){\n        const lk=", "      if(false){\n        const lk=")
+          rep(f, "hostFull?(testMode?'Bezoeker \\u00b7 testversie':'Bezoeker')", "hostFull?(testMode?'Host \\u00b7 testversie':'Host')")
+          rep('README.md', 'De host komt alleen binnen met een toegangscode die een Beheerder 2 per mail krijgt.', 'In het echte portaal komt de host alleen binnen met een toegangscode die een Beheerder 2 per mail krijgt; in deze demo staat die beveiliging uit.')
+          rep('README.md', '- **Functioneringsgesprekken:** je bent hier "bezoeker". Vul `0000` in voor de testversie, of klik op **Code aanvragen**: in de demo verschijnt de code rechtsonder.', '- **Functioneringsgesprekken:** open de app direct, zonder code. Plan een gesprek, vul het gespreksformulier in en download het verslag als PDF.')
+          PY
+      - name: Committen
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Functioneringsgesprekken zonder toegangscode in de demo"
+          git push
