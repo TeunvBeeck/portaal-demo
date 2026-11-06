@@ -18,7 +18,7 @@ Rechtsonder staat een demobalk. Met **Opnieuw beginnen** zet je alle gegevens te
 | App | Wat het doet |
 | --- | --- |
 | **Startpagina** | Widgets met live cijfers per app (open retouren, retouren die te lang onderweg zijn, accounts zonder toegang). Indeling zelf aan te passen (slepen, grootte S/M/L, verbergen). Licht, donker of automatisch. |
-| **Functioneringsgesprekken** | Gesprekken voeren en vastleggen: medewerkers, gespreksformulier, planning, afspraken, doelen volgen en verslagen als PDF. Rollen: Beheerder 1 en 2, Alleen kijken en Leidinggevende (ziet alleen de eigen afdeling, nooit het eigen dossier). De host komt alleen binnen met een toegangscode die een Beheerder 2 per mail krijgt. |
+| **Functioneringsgesprekken** | Gesprekken voeren en vastleggen: medewerkers, gespreksformulier, planning, afspraken, doelen volgen en verslagen als PDF. Rollen: Beheerder 1 en 2, Alleen kijken en Leidinggevende (ziet alleen de eigen afdeling, nooit het eigen dossier). In het echte portaal komt de host alleen binnen met een toegangscode die een Beheerder 2 per mail krijgt; in deze demo staat die beveiliging uit. |
 | **Retouren** | Alle retouraanvragen die via de klantenservice-chatbot binnenkomen: status bijhouden (aangemeld → ontvangen → gecontroleerd → terugbetaald), zoeken, cijfers per week en signalering van retouren die te lang openstaan. Rollen per afdeling: klantenservice, magazijn en financiën mogen elk alleen hun eigen stap zetten. |
 | **Accounts & toegang** | Per persoon per app de toegang en rol kiezen, beheerders aanwijzen, uitnodigingen met vooraf gekozen toegang, geblokkeerde accounts vrijgeven, een logboek van alle wijzigingen en een testaccount om het portaal te bekijken als een gewone collega. |
 
@@ -32,7 +32,7 @@ Rechtsonder staat een demobalk. Met **Opnieuw beginnen** zet je alle gegevens te
 
 ## Dingen om te proberen
 
-- **Functioneringsgesprekken:** je bent hier "bezoeker". Vul `0000` in voor de testversie, of klik op **Code aanvragen**: in de demo verschijnt de code rechtsonder.
+- **Functioneringsgesprekken:** open de app direct, zonder code. Plan een gesprek, vul het gespreksformulier in en download het verslag als PDF.
 - **Retouren:** open een retour en zet de status op Ontvangen. De geschiedenis houdt bij wie wat deed.
 - **Accounts & toegang:** geef iemand de rol Magazijn, maak een uitnodiging of klik op **Testaccount openen** om in een nieuw tabblad te zien wat een collega met die rechten ziet.
 

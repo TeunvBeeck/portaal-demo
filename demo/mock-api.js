@@ -362,6 +362,8 @@
     }
     if (path === '/api/fp/toegang') {
       if (!me.isHost) return ok({ bezoeker: false });
+      // Demo: geen toegangscode, de host opent Functioneringsgesprekken direct.
+      return ok({ bezoeker: true, open: true, modus: 'echt', openTot: iso(Date.now() + 365 * DAY) });
       var until = ms(me.fp_unlock_until), c = db.fpcode || {}, nu2 = Date.now();
       return ok({ bezoeker: true, open: until > nu2, modus: until > nu2 ? me.fp_unlock_mode : '', openTot: until > nu2 ? me.fp_unlock_until : '',
         codeAangevraagd: !!(c.code && ms(c.expires) > nu2), codeGeldigTot: c.expires || '', geblokkeerdTot: ms(c.locked_until) > nu2 ? c.locked_until : '',
@@ -514,7 +516,7 @@
       var top = function (o) { var b = null; for (var k in o) if (!b || o[k] > o[b]) b = k; return b; };
       out.retouren = { open: open, laat: laat, vandaag: vandaag, weken: weken, top_product: top(prod), top_reden: top(reden) };
     }
-    if (!u.isHost && u.fp_access) {
+    if (u.isHost || u.fp_access) {
       var docs = {};
       if (u.fp_access === 'afd') fpWeergave(u).forEach(function (x) { docs[x.key] = x.value; });
       else db[fpColl(u)].forEach(function (d) { docs[d.key] = d.value; });
@@ -610,7 +612,7 @@
     var verborgen = false; try { verborgen = sessionStorage.getItem('vpdemo_bar') === 'uit'; } catch (_) {}
     if (!verborgen) document.body.append(d);
     // Functioneringsgesprekken: uitleg bij het scherm met de toegangscode
-    var tries = 0, iv = setInterval(function () {
+    var tries = 21, iv = setInterval(function () {
       if (++tries > 20) return clearInterval(iv);
       var ov = document.getElementById('loginOverlay');
       if (ov && !ov.classList.contains('hidden') && /Toegangscode/.test(ov.textContent)) {

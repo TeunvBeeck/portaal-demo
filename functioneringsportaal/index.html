@@ -1492,7 +1492,7 @@ window.__portalRefresh=()=>{render();if(!$('settingsPage').classList.contains('h
       if(testMode&&!AFD&&KEYS.every(k=>!(versions[k]>0)&&cache.get('fw_'+k)==='[]')){try{await seedTest()}catch(e){console.error(e)}}
       if(readOnly){document.body.classList.add('fp-readonly');const b=$('readonlyBanner');if(b)b.classList.remove('hidden')}
       const lb=$('logoutButton');lb.textContent='Naar portaal';lb.classList.remove('hidden');lb.addEventListener('click',()=>{if(pending.size||saving){notify('Even wachten: je wijzigingen worden nog opgeslagen.');return}location.href='../index.html'});
-      if(hostFull){
+      if(false){
         const lk=document.createElement('button');lk.type='button';lk.className='secondary lock-button';lk.id='fpLock';lk.textContent='Vergrendelen';
         lk.title='De app weer op slot zetten. Daarna heb je opnieuw een toegangscode nodig (0000 voor de testversie).';
         lk.addEventListener('click',async()=>{if(pending.size||saving){notify('Even wachten: je wijzigingen worden nog opgeslagen.');return}
@@ -1511,7 +1511,7 @@ window.__portalRefresh=()=>{render();if(!$('settingsPage').classList.contains('h
         tb.append(tt,rb);const main=document.querySelector('.app-content main');main.insertBefore(tb,main.firstChild);
       }
       const logo=document.querySelector('.brand-logo');if(logo&&!logo.closest('a')){const l=document.createElement('a');l.href='../index.html';l.title='Naar het portaal';l.setAttribute('aria-label','Naar het portaal');logo.replaceWith(l);l.append(logo)}
-      const foot=document.querySelector('.sidebar-foot');if(foot){foot.querySelector('strong').textContent=rec.name||rec.email;foot.querySelector('small').textContent=hostFull?(testMode?'Bezoeker \u00b7 testversie':'Bezoeker'):readOnly?'Alleen kijken':AFD?'Leidinggevende \u00b7 '+((rec.fp_afdelingen||[]).join(', ')||'geen afdeling'):rec.fp_codes?'Beheerder 2':'Beheerder 1';const av=foot.querySelector('.avatar');if(av)av.textContent=(rec.name||rec.email||'?').trim().charAt(0).toUpperCase()}
+      const foot=document.querySelector('.sidebar-foot');if(foot){foot.querySelector('strong').textContent=rec.name||rec.email;foot.querySelector('small').textContent=hostFull?(testMode?'Host \u00b7 testversie':'Host'):readOnly?'Alleen kijken':AFD?'Leidinggevende \u00b7 '+((rec.fp_afdelingen||[]).join(', ')||'geen afdeling'):rec.fp_codes?'Beheerder 2':'Beheerder 1';const av=foot.querySelector('.avatar');if(av)av.textContent=(rec.name||rec.email||'?').trim().charAt(0).toUpperCase()}
       const note=$('storageNote');if(note)note.textContent=testMode?'Testversie: verzonnen gegevens, apart opgeslagen. De echte gegevens blijven onaangeroerd.':'Gegevens worden opgeslagen op de server van het Demo Portaal. Alleen collega’s met toegang kunnen ze zien.';
       setStatus('Opgeslagen','ok');
       window.__startPortal();
